@@ -1,9 +1,9 @@
 package com.cyssxt.telegrambotsdk4j.methods;
 
 import com.cyssxt.telegrambotsdk4j.constant.ApiConstant;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
+import kong.unirest.UnirestException;
 
 public class MethodAction {
     public static void main(String[] args) throws UnirestException {

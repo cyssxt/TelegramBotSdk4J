@@ -8,4 +8,10 @@ import java.util.List;
 public class Response<T> {
     Boolean ok;
     List<T> result;
+
+    public static Response success() {
+        Response  response = new Response();
+        response.setOk(true);
+        return response;
+    }
 }

@@ -5,11 +5,12 @@ import com.alibaba.fastjson.TypeReference;
 import com.cyssxt.telegrambotsdk4j.req.SendMessageReq;
 import com.cyssxt.telegrambotsdk4j.type.Message;
 import com.cyssxt.telegrambotsdk4j.type.Response;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import com.cyssxt.telegrambotsdk4j.util.ParamUtil;
+import kong.unirest.*;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Map;
 
 import static com.cyssxt.telegrambotsdk4j.constant.ApiConstant.BASE_API;
 
@@ -23,17 +24,34 @@ public abstract class BaseAction<T,V> {
         return String.format("%s/bot%s/%s",BASE_API,token,getMethod());
     }
 
+    public boolean isForm(){
+        return false;
+    }
+
     String token;
     public Response<V> send(T t) throws UnirestException {
         String url = getUrl();
-        log.info("send url={}",url);
-        String params = JSON.toJSONString(t);
-        log.info("params={}",params);
-        HttpResponse<String> stringHttpResponse = Unirest.post(url).header("Content-Type","application/json").body(params).asString();
+        HttpResponse<String> stringHttpResponse = (isForm()?createFormReq(url,t):createReq(url,t)).asString();
         String body = stringHttpResponse.getBody();
         log.info("body={}",body);
         Response<V> response = JSON.parseObject(body, getTypeReference());
         return response;
+    }
+
+    public HttpRequest createReq(String url,T t){
+        log.info("send url={}",url);
+        String params = JSON.toJSONString(t);
+        log.info("params={}",params);
+        HttpRequest body = Unirest.post(url).header("Content-Type", "application/json").body(params);
+        return body;
+    }
+
+    public HttpRequest createFormReq(String url,T t){
+        log.info("send url={}",url);
+        Map<String, Object> params = ParamUtil.parse(t);
+        log.info("params={}",params);
+        MultipartBody fields = Unirest.post(url).header("Content-Type", "application/form-data").fields(params);
+        return fields;
     }
 
     public abstract TypeReference<Response<V>> getTypeReference();
