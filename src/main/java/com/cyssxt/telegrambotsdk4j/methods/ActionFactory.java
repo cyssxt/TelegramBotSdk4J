@@ -4,7 +4,6 @@ import com.cyssxt.telegrambotsdk4j.req.SetWebhookReq;
 import com.cyssxt.telegrambotsdk4j.type.Response;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StringUtils;
 
 @Slf4j
 @Builder
@@ -16,7 +15,7 @@ public class ActionFactory {
     }
     public static void init(String token,String notifyUrl){
         ActionFactory.token = token;
-        if(StringUtils.isEmpty(notifyUrl)){
+        if(notifyUrl==null || "".equals(notifyUrl)){
             return;
         }
         try {

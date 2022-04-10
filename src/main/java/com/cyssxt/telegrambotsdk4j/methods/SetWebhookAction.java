@@ -5,6 +5,7 @@ import com.cyssxt.telegrambotsdk4j.req.SetWebhookReq;
 import com.cyssxt.telegrambotsdk4j.req.UpdateReq;
 import com.cyssxt.telegrambotsdk4j.type.MessageResult;
 import com.cyssxt.telegrambotsdk4j.type.Response;
+import kong.unirest.HttpRequest;
 import kong.unirest.RequestBodyEntity;
 import kong.unirest.Unirest;
 
@@ -28,7 +29,7 @@ public class SetWebhookAction extends BaseAction<SetWebhookReq, String> {
 
     @Override
     public boolean isForm() {
-        return true;
+        return false;
     }
 }
 

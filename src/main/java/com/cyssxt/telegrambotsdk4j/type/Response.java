@@ -7,11 +7,15 @@ import java.util.List;
 @Data
 public class Response<T> {
     Boolean ok;
-    List<T> result;
+    T result;
 
     public static Response success() {
         Response  response = new Response();
         response.setOk(true);
         return response;
+    }
+
+    public boolean isOk(){
+        return ok!=null && ok;
     }
 }

@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class Chat {
-    Integer id;
+    Long id;
     String type;
     String title;
     String username;

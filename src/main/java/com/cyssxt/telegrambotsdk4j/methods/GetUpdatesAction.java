@@ -6,7 +6,7 @@ import com.cyssxt.telegrambotsdk4j.type.Response;
 import com.cyssxt.telegrambotsdk4j.type.MessageResult;
 import static com.cyssxt.telegrambotsdk4j.constant.ApiConstant.GET_UPDATES;
 
-public class GetUpdatesAction extends BaseAction<UpdateReq, MessageResult> {
+public class GetUpdatesAction extends BaseAction<UpdateReq, java.util.List<MessageResult>> {
 
     @Override
     public String getMethod() {
@@ -14,7 +14,7 @@ public class GetUpdatesAction extends BaseAction<UpdateReq, MessageResult> {
     }
 
     @Override
-    public TypeReference<Response<MessageResult>> getTypeReference() {
-        return new TypeReference<Response<MessageResult>>(){};
+    public TypeReference<Response<java.util.List<MessageResult>>> getTypeReference() {
+        return new TypeReference<Response<java.util.List<MessageResult>>>(){};
     }
 }

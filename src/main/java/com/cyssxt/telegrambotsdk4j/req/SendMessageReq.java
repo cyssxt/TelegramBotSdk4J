@@ -9,10 +9,14 @@ import java.util.List;
 @Data
 public class SendMessageReq {
     @JSONField(name="chat_id")
-    String chatId;
+    Object chatId;
     String text;
+    @JSONField(name="message_id")
+    Long messageId;
+    @JSONField(name="inline_message_id")
+    String inlineMessageId;
     @JSONField(name="parse_mode")
-    String parseMode;
+    String parseMode;//MarkdownV2
     List<MessageEntity> entities;
     @JSONField(name="disable_web_page_preview")
     Boolean disableWebPagePreview;
@@ -21,7 +25,7 @@ public class SendMessageReq {
     @JSONField(name="protect_content")
     Boolean protectContent;
     @JSONField(name="reply_to_message_id")
-    Integer replyToMessageId;
+    Long replyToMessageId;
     @JSONField(name="reply_markup")
     Object replyMarkup;
 }
