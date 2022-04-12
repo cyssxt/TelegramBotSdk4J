@@ -2,14 +2,13 @@ package com.cyssxt.telegrambotsdk4j.methods;
 
 import com.alibaba.fastjson.TypeReference;
 import com.cyssxt.telegrambotsdk4j.req.GetChatMemberReq;
-import com.cyssxt.telegrambotsdk4j.req.UpdateReq;
 import com.cyssxt.telegrambotsdk4j.type.ChatMember;
 import com.cyssxt.telegrambotsdk4j.type.Response;
-import com.cyssxt.telegrambotsdk4j.type.WebhookInfo;
+import lombok.extern.slf4j.Slf4j;
 
 import static com.cyssxt.telegrambotsdk4j.constant.ApiConstant.GET_CHAT_MEMBER;
-import static com.cyssxt.telegrambotsdk4j.constant.ApiConstant.GET_WEBHOOK_INFO;
 
+@Slf4j
 public class GetChatMemberAction extends BaseAction<GetChatMemberReq, ChatMember> {
 
     @Override
@@ -31,10 +30,12 @@ public class GetChatMemberAction extends BaseAction<GetChatMemberReq, ChatMember
             t.setChatId(chatId);
             Response<ChatMember> send = baseAction.send(t);
             if(send.isOk()){
-
+                ChatMember member= send.getResult();
+                String status = member.getStatus();//creator,administrator,member
+                flag = "creator,administrator,member,".contains(status);
             }
         }catch(Exception e){
-
+            log.info("isMemeber={}",flag);
         }
         return flag;
 
