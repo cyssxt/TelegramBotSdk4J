@@ -4,5 +4,5 @@ import com.cyssxt.telegrambotsdk4j.type.MessageResult;
 
 public interface UpdateCallback {
 
-    void receive(MessageResult result) throws InstantiationException, IllegalAccessException;
+    void receive(MessageResult result,String botKey) throws InstantiationException, IllegalAccessException;
 }

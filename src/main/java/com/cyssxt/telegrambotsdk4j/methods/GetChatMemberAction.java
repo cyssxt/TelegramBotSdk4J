@@ -21,10 +21,10 @@ public class GetChatMemberAction extends BaseAction<GetChatMemberReq, ChatMember
         return new TypeReference<Response<ChatMember>>(){};
     }
 
-    public static boolean isMemeber(Long userId,String chatId) {
+    public static boolean isMemeber(ActionFactory actionFactory,Long userId,String chatId) {
         boolean flag= false;
         try{
-            BaseAction<GetChatMemberReq, ChatMember> baseAction = ActionFactory.create(GetChatMemberAction.class);
+            BaseAction<GetChatMemberReq, ChatMember> baseAction = actionFactory.create(GetChatMemberAction.class);
             GetChatMemberReq t = new GetChatMemberReq();
             t.setUserId(userId);
             t.setChatId(chatId);

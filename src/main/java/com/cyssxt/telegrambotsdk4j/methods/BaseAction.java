@@ -33,6 +33,7 @@ public abstract class BaseAction<T,V> {
     }
 
     String token;
+    private String key;
     public Response<V> send(T t) throws UnirestException {
         String url = getUrl();
         HttpResponse<String> stringHttpResponse = (isForm()?createFormReq(url,t):createReq(url,t)).asString();
@@ -61,25 +62,25 @@ public abstract class BaseAction<T,V> {
     public abstract TypeReference<Response<V>> getTypeReference();
 
     public static void main(String[] args) throws UnirestException, InstantiationException, IllegalAccessException {
-        ActionFactory.init("5199907604:AAGib3wDJwyKYrJ2QBgiUlVs9LKzXcbqV9w");
-        BaseAction<SendMessageReq, Message> getUpdatesAction = ActionFactory.create(SendMessageAction.class);
-        SendMessageReq t = new SendMessageReq();
-        t.setChatId("-728082078");
-        t.setText("as冻结2斤来看加31斤3就开奖了2级颗粒剂链就👁3记录卡2斤了23");
-        InlineKeyboardMarkup btns = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
-        List<InlineKeyboardButton> keybord = new ArrayList<>();
-        InlineKeyboardButton e = new InlineKeyboardButton();
-//        e.getCallbackData();
-        e.setText("分享");
-        e.setCallbackData("回调函数");
-//        e.setUrl("https://www.baidu.com");
-        keybord.add(e);
-        rows.add(keybord);
-        btns.setInlineKeyboard(rows);
-        t.setReplyMarkup(btns);
-        Response<Message> send = getUpdatesAction.send(t);
-        System.out.println(send);
+//        ActionFactory.init("5199907604:AAGib3wDJwyKYrJ2QBgiUlVs9LKzXcbqV9w");
+//        BaseAction<SendMessageReq, Message> getUpdatesAction = ActionFactory.create(SendMessageAction.class);
+//        SendMessageReq t = new SendMessageReq();
+//        t.setChatId("-728082078");
+//        t.setText("as冻结2斤来看加31斤3就开奖了2级颗粒剂链就👁3记录卡2斤了23");
+//        InlineKeyboardMarkup btns = new InlineKeyboardMarkup();
+//        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
+//        List<InlineKeyboardButton> keybord = new ArrayList<>();
+//        InlineKeyboardButton e = new InlineKeyboardButton();
+////        e.getCallbackData();
+//        e.setText("分享");
+//        e.setCallbackData("回调函数");
+////        e.setUrl("https://www.baidu.com");
+//        keybord.add(e);
+//        rows.add(keybord);
+//        btns.setInlineKeyboard(rows);
+//        t.setReplyMarkup(btns);
+//        Response<Message> send = getUpdatesAction.send(t);
+//        System.out.println(send);
 //        BaseAction<UpdateReq, Update> getUpdatesAction = ActionFactory.create(GetUpdatesAction.class);
 //        UpdateReq req = new UpdateReq();
 //        Response<Update> send = getUpdatesAction.send(req);

@@ -22,8 +22,8 @@ public class EditMessageTextAction extends BaseAction<SendMessageReq, Message> {
         return new TypeReference<Response<Message>>(){};
     }
 
-    public static void editMessage(Long messageId,Long chatId,String text,InlineKeyboardButton ...buttons) throws InstantiationException, IllegalAccessException {
-        BaseAction<SendMessageReq, Message> editAction = ActionFactory.create(EditMessageTextAction.class);
+    public static void editMessage(ActionFactory actionFactory,Long messageId,Long chatId,String text,InlineKeyboardButton ...buttons) throws InstantiationException, IllegalAccessException {
+        BaseAction<SendMessageReq, Message> editAction = actionFactory.create(EditMessageTextAction.class);
         SendMessageReq editReq = new SendMessageReq();
 //            editReq.setChatId(result.getCallbackQuery().getChatInstance());
         editReq.setText(text);

@@ -21,8 +21,8 @@ public class SendMessageAction extends BaseAction<SendMessageReq, Message> {
         return new TypeReference<Response<Message>>(){};
     }
 
-    public static void sendMessage(String text,Long chatId,String[]...args) throws InstantiationException, IllegalAccessException {
-        BaseAction<SendMessageReq, Message> baseAction = ActionFactory.create(SendMessageAction.class);
+    public static void sendMessage(ActionFactory actionFactory,String text,Long chatId,String[]...args) throws InstantiationException, IllegalAccessException {
+        BaseAction<SendMessageReq, Message> baseAction = actionFactory.create(SendMessageAction.class);
         SendMessageReq t = new SendMessageReq();
         t.setChatId(chatId);
         t.setText(text);
@@ -47,8 +47,8 @@ public class SendMessageAction extends BaseAction<SendMessageReq, Message> {
         }
         baseAction.send(t);
     }
-    public static void sendReplyMessage(String text,Long chatId,String ...args) throws InstantiationException, IllegalAccessException {
-        BaseAction<SendMessageReq, Message> baseAction = ActionFactory.create(SendMessageAction.class);
+    public static void sendReplyMessage(ActionFactory actionFactory,String text,Long chatId,String ...args) throws InstantiationException, IllegalAccessException {
+        BaseAction<SendMessageReq, Message> baseAction = actionFactory.create(SendMessageAction.class);
         SendMessageReq t = new SendMessageReq();
         t.setChatId(chatId);
         t.setText(text);
