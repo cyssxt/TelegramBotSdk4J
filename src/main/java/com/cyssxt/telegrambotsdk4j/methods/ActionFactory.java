@@ -45,12 +45,12 @@ public class ActionFactory {
                     DeleteWebhookReq t = new DeleteWebhookReq();
                     t.setDropPendingUpdates(true);
                     deleteWebhookReqBooleanBaseAction.send(t);
+                    BaseAction<SetWebhookReq, String> baseAction = actionFactory.create(SetWebhookAction.class);
+                    SetWebhookReq param = new SetWebhookReq();
+                    param.setUrl(notifyUrl);
+                    Response<String> send = baseAction.send(param);
+                    log.info("set webhook={}", send);
                 }
-                BaseAction<SetWebhookReq, String> baseAction = actionFactory.create(SetWebhookAction.class);
-                SetWebhookReq param = new SetWebhookReq();
-                param.setUrl(notifyUrl);
-                Response<String> send = baseAction.send(param);
-                log.info("set webhook={}", send);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
