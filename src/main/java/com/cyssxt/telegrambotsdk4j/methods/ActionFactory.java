@@ -25,6 +25,7 @@ public class ActionFactory {
 
     public static void init(String key,String token,String notifyUrl){
         ActionFactory actionFactory = FACTORY_MAP.get(key);
+        log.info("init");
         if(actionFactory==null) {
             actionFactory = new ActionFactory(key, token, notifyUrl);
             actionFactory.token = token;
@@ -55,6 +56,7 @@ public class ActionFactory {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
+            FACTORY_MAP.put(key,actionFactory);
         }
     }
 
