@@ -1,7 +1,10 @@
 package com.cyssxt.telegrambotsdk4j.methods;
 
+import com.cyssxt.telegrambotsdk4j.req.DeleteWebhookReq;
 import com.cyssxt.telegrambotsdk4j.req.SetWebhookReq;
+import com.cyssxt.telegrambotsdk4j.req.UpdateReq;
 import com.cyssxt.telegrambotsdk4j.type.Response;
+import com.cyssxt.telegrambotsdk4j.type.WebhookInfo;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +32,18 @@ public class ActionFactory {
                 return;
             }
             try {
+                BaseAction<UpdateReq, WebhookInfo> getWebhookInfoAction = actionFactory.create(GetWebhookInfoAction.class);
+                UpdateReq hookInfo = new UpdateReq();
+                Response<WebhookInfo> response = getWebhookInfoAction.send(hookInfo);
+                WebhookInfo result = response.getResult();
+                log.info("result={}",result);
+                String url = result.getUrl();
+                if(url!=null && !url.startsWith(notifyUrl)){
+                    BaseAction<DeleteWebhookReq, Boolean> deleteWebhookReqBooleanBaseAction = actionFactory.create(DeleteWebhookAction.class);
+                    DeleteWebhookReq t = new DeleteWebhookReq();
+                    t.setDropPendingUpdates(true);
+                    deleteWebhookReqBooleanBaseAction.send(t);
+                }
                 BaseAction<SetWebhookReq, String> baseAction = actionFactory.create(SetWebhookAction.class);
                 SetWebhookReq param = new SetWebhookReq();
                 param.setUrl(notifyUrl);
