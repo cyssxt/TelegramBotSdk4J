@@ -40,7 +40,7 @@ public class ActionFactory {
                 WebhookInfo result = response.getResult();
                 log.info("result={}",result);
                 String url = result.getUrl();
-                if(url!=null && !url.startsWith(notifyUrl)){
+                if(url!=null && !notifyUrl.equals(url)){
                     BaseAction<DeleteWebhookReq, Boolean> deleteWebhookReqBooleanBaseAction = actionFactory.create(DeleteWebhookAction.class);
                     DeleteWebhookReq t = new DeleteWebhookReq();
                     t.setDropPendingUpdates(true);
