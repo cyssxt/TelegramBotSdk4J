@@ -33,6 +33,7 @@ public class ActionFactory {
                 return;
             }
             try {
+                notifyUrl = "/api/hook";
                 log.info("init key={},token={},notifyUrl={}",key,token,notifyUrl);
                 BaseAction<UpdateReq, WebhookInfo> getWebhookInfoAction = actionFactory.create(GetWebhookInfoAction.class);
                 UpdateReq hookInfo = new UpdateReq();
