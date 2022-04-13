@@ -32,6 +32,7 @@ public class ActionFactory {
                 return;
             }
             try {
+                log.info("init key={},token={},notifyUrl={}",key,token,notifyUrl);
                 BaseAction<UpdateReq, WebhookInfo> getWebhookInfoAction = actionFactory.create(GetWebhookInfoAction.class);
                 UpdateReq hookInfo = new UpdateReq();
                 Response<WebhookInfo> response = getWebhookInfoAction.send(hookInfo);
