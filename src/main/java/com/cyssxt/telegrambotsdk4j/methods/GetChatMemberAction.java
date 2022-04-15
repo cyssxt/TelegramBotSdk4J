@@ -33,6 +33,7 @@ public class GetChatMemberAction extends BaseAction<GetChatMemberReq, ChatMember
                 ChatMember member= send.getResult();
                 String status = member.getStatus();//creator,administrator,member
                 flag = "creator,administrator,member,".contains(status);
+                log.info("status={},chatId={}",status,chatId);
             }
         }catch(Exception e){
             log.info("isMemeber={}",flag);
