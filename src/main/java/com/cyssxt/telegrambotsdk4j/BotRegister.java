@@ -34,7 +34,11 @@ public class BotRegister {
                     log.info("init={}", LocalDateTime.now());
                     while ((poll= WAIT_SEND.poll())!=null){
                         log.info("init={}",poll);
-                        ActionFactory.quickSend(poll.getKey(),poll.getMessage());
+                        try {
+                            ActionFactory.quickSend(poll.getKey(), poll.getMessage());
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                     Thread.sleep(5*1000);
                 }
