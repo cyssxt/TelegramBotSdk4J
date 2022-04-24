@@ -18,6 +18,9 @@ public class BotRegister {
     public static void addWaitSend(WaitSend waitSend){
         WAIT_SEND.add(waitSend);
     }
+    public static void addWaitSend(String key,String message){
+        addWaitSend(WaitSend.builder().key(key).message(message).build());
+    }
 
     public static void init(){
         for (int i = 0; i < 5; i++) {

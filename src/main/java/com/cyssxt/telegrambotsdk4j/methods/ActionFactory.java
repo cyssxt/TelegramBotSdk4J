@@ -86,6 +86,9 @@ public class ActionFactory {
             log.info("quickSend key={},message={}",key,message);
             return;
         }
+        if(!instance.channelName.startsWith("@")){
+            instance.channelName = "@"+instance.channelName;
+        }
         try {
             SendMessageAction.sendMessage(instance,message,instance.channelName);
         } catch (InstantiationException e) {
