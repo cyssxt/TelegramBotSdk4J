@@ -3,6 +3,7 @@ package com.cyssxt.telegrambotsdk4j;
 import com.cyssxt.telegrambotsdk4j.methods.ActionFactory;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ExecutorService;
@@ -30,6 +31,7 @@ public class BotRegister {
             executorService.submit(() -> {
                 while (true){
                     WaitSend poll;
+                    log.info("init={}", LocalDateTime.now());
                     while ((poll= WAIT_SEND.poll())!=null){
                         log.info("init={}",poll);
                         ActionFactory.quickSend(poll.getKey(),poll.getMessage());
