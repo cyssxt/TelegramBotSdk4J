@@ -82,6 +82,7 @@ public class ActionFactory {
 
     public static void quickSend(String key,String message){
         ActionFactory instance = ActionFactory.getInstance(key);
+        log.info("key={},instance={}",key,instance);
         if(instance.channelName==null || "".equals(instance.channelName)){
             log.info("quickSend key={},message={}",key,message);
             return;
