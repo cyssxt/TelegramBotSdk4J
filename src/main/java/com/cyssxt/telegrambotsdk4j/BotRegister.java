@@ -1,11 +1,14 @@
 package com.cyssxt.telegrambotsdk4j;
 
 import com.cyssxt.telegrambotsdk4j.methods.ActionFactory;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@Slf4j
 public class BotRegister {
 
     private final static Queue<WaitSend> WAIT_SEND = new LinkedList();
@@ -28,6 +31,7 @@ public class BotRegister {
                 while (true){
                     WaitSend poll;
                     while ((poll= WAIT_SEND.poll())!=null){
+                        log.info("init={}",poll);
                         ActionFactory.quickSend(poll.getKey(),poll.getMessage());
                     }
                     Thread.sleep(5*1000);
