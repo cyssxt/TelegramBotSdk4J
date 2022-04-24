@@ -11,4 +11,5 @@ public class BotInfo {
     String hook;
     String key;
     String channelName;
+    public BotInfo(){}
 }
