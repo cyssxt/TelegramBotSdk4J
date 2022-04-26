@@ -36,10 +36,13 @@ public class ActionFactory {
         boolean repeat = false;
         if(actionFactory==null) {
             actionFactory = new ActionFactory(key, token, notifyUrl,channelName);
-            actionFactory.token = token;
         }else{
             repeat = true;
         }
+        actionFactory.token = token;
+        actionFactory.notifyUrl = notifyUrl;
+        actionFactory.key = key;
+        actionFactory.channelName = channelName;
         try {
             notifyUrl = notifyUrl+"/api/hook/"+key;
             log.info("init key={},token={},notifyUrl={},repeat={}",key,token,notifyUrl,repeat);
