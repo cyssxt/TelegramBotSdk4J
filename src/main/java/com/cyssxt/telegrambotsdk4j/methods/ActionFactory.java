@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -83,7 +84,7 @@ public class ActionFactory {
         return tvBaseAction;
     }
 
-    public static void quickSend(String key,String message){
+    public static void quickSend(String key, String message, List<Map<String, String>> hrefs){
         ActionFactory instance = ActionFactory.getInstance(key);
         log.info("key={},instance={}",key,instance);
         if(instance==null || instance.channelName==null || "".equals(instance.channelName)){
@@ -94,7 +95,7 @@ public class ActionFactory {
             instance.channelName = "@"+instance.channelName;
         }
         try {
-            SendMessageAction.sendMessage(instance,message,instance.channelName);
+            SendMessageAction.sendMessageHrefs(instance,message,instance.channelName,hrefs);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

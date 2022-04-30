@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -35,7 +37,7 @@ public class BotRegister {
                     while ((poll= WAIT_SEND.poll())!=null){
                         log.info("init={}",poll);
                         try {
-                            ActionFactory.quickSend(poll.getKey(), poll.getMessage());
+                            ActionFactory.quickSend(poll.getKey(), poll.getMessage(),poll.getHrefs());
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -44,5 +46,9 @@ public class BotRegister {
                 }
             });
         }
+    }
+
+    public static void addWaitSend(String key, String message, List<Map<String, String>> hrefs) {
+        addWaitSend(WaitSend.builder().key(key).message(message).hrefs(hrefs).build());
     }
 }

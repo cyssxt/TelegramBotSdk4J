@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class SendMessageAction extends BaseAction<SendMessageReq, Message> {
@@ -22,6 +23,26 @@ public class SendMessageAction extends BaseAction<SendMessageReq, Message> {
     }
     public static void sendMessage(ActionFactory actionFactory,String text,Object chatId,String[]...args) throws InstantiationException, IllegalAccessException {
         sendMessage(actionFactory,text,chatId,null,args);
+    }
+    public static void sendMessageHrefs(ActionFactory actionFactory, String text, Object chatId, List<Map<String,String>> hrefs, String[]...args) throws InstantiationException, IllegalAccessException {
+        List<MessageEntity> entities = null;
+        if(hrefs!=null && hrefs.size()>0){
+            entities = new ArrayList<>();
+            for (Map<String, String> href : hrefs) {
+                String content = href.get("content");
+                String ref = href.get("ref");
+                int index = text.indexOf(content);
+                if(index>-1) {
+                    MessageEntity message = new MessageEntity();
+                    message.setOffset(index - 1);
+                    message.setType("text_link");
+                    message.setLength(content.length());
+                    message.setUrl(ref);
+                    entities.add(message);
+                }
+            }
+        }
+        sendMessage(actionFactory,text,chatId,entities,args);
     }
     public static void sendMessage(ActionFactory actionFactory,String text,Object chatId,List<MessageEntity> entities,String[]...args) throws InstantiationException, IllegalAccessException {
         BaseAction<SendMessageReq, Message> baseAction = actionFactory.create(SendMessageAction.class);
