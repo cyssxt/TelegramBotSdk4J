@@ -31,10 +31,13 @@ public class SendMessageAction extends BaseAction<SendMessageReq, Message> {
             for (Map<String, String> href : hrefs) {
                 String content = href.get("content");
                 String ref = href.get("href");
+                if(ref==null || "".equals(ref)){
+                    return;
+                }
                 int index = text.indexOf(content);
                 if(index>-1) {
                     MessageEntity message = new MessageEntity();
-                    message.setOffset(index - 1);
+                    message.setOffset(index);
                     message.setType("text_link");
                     message.setLength(content.length());
                     message.setUrl(ref);
