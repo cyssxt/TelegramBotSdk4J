@@ -30,7 +30,7 @@ public class SendMessageAction extends BaseAction<SendMessageReq, Message> {
             entities = new ArrayList<>();
             for (Map<String, String> href : hrefs) {
                 String content = href.get("content");
-                String ref = href.get("ref");
+                String ref = href.get("href");
                 int index = text.indexOf(content);
                 if(index>-1) {
                     MessageEntity message = new MessageEntity();
