@@ -3,8 +3,8 @@ package com.cyssxt.telegrambotsdk4j.methods;
 import com.alibaba.fastjson.TypeReference;
 import com.cyssxt.telegrambotsdk4j.req.SendMessageReq;
 import com.cyssxt.telegrambotsdk4j.type.*;
+import com.cyssxt.telegrambotsdk4j.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +33,9 @@ public class SendMessageAction extends BaseAction<SendMessageReq, Message> {
                 String ref = href.get("href");
                 if(ref==null || "".equals(ref)){
                     return;
+                }
+                if( StringUtils.isEmpty(text) || StringUtils.isEmpty(content)){
+                    continue;
                 }
                 int index = text.indexOf(content);
                 if(index>-1) {
