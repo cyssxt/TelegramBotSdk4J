@@ -83,19 +83,23 @@ public class ActionFactory {
         tvBaseAction.setKey(this.key);
         return tvBaseAction;
     }
-
     public static void quickSend(String key, String message, List<Map<String, String>> hrefs){
+        quickSend(key,message,hrefs,null);
+    }
+    public static void quickSend(String key, String message, List<Map<String, String>> hrefs,Object chatId){
         ActionFactory instance = ActionFactory.getInstance(key);
         log.info("key={},instance={}",key,instance);
         if(instance==null || instance.channelName==null || "".equals(instance.channelName)){
             log.info("quickSend key={},message={}",key,message);
             return;
         }
-        if(!instance.channelName.startsWith("@")){
-            instance.channelName = "@"+instance.channelName;
+        if(chatId==null) {
+            if (!instance.channelName.startsWith("@")) {
+                chatId = "@" + instance.channelName;
+            }
         }
         try {
-            SendMessageAction.sendMessageHrefs(instance,message,instance.channelName,hrefs);
+            SendMessageAction.sendMessageHrefs(instance,message,chatId,hrefs);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -103,17 +107,22 @@ public class ActionFactory {
         }
     }
     public void quickSend(String message, List<Map<String, String>> hrefs){
+        quickSend(message,hrefs,null);
+    }
+    public void quickSend(String message, List<Map<String, String>> hrefs,Object chatId){
         ActionFactory instance = this;
         log.info("key={},instance={},channelName={}",key,instance,instance.channelName);
         if(instance==null || instance.channelName==null || "".equals(instance.channelName)){
             log.info("quickSend key={},message={}",key,message);
             return;
         }
-        if(!instance.channelName.startsWith("@")){
-            instance.channelName = "@"+instance.channelName;
+        if(chatId==null) {
+            if (!instance.channelName.startsWith("@")) {
+                chatId = "@" + instance.channelName;
+            }
         }
         try {
-            SendMessageAction.sendMessageHrefs(instance,message,instance.channelName,hrefs);
+            SendMessageAction.sendMessageHrefs(instance,message,chatId,hrefs);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
