@@ -32,7 +32,7 @@ public class SendMessageAction extends BaseAction<SendMessageReq, Message> {
                 String content = href.get("content");
                 String ref = href.get("href");
                 if(ref==null || "".equals(ref)){
-                    return;
+                    continue;
                 }
                 if( StringUtils.isEmpty(text) || StringUtils.isEmpty(content)){
                     continue;
