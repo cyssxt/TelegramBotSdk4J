@@ -102,6 +102,24 @@ public class ActionFactory {
             e.printStackTrace();
         }
     }
+    public void quickSend(String message, List<Map<String, String>> hrefs){
+        ActionFactory instance = this;
+        log.info("key={},instance={}",key,instance);
+        if(instance==null || instance.channelName==null || "".equals(instance.channelName)){
+            log.info("quickSend key={},message={}",key,message);
+            return;
+        }
+        if(!instance.channelName.startsWith("@")){
+            instance.channelName = "@"+instance.channelName;
+        }
+        try {
+            SendMessageAction.sendMessageHrefs(instance,message,instance.channelName,hrefs);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         String key = "111";
