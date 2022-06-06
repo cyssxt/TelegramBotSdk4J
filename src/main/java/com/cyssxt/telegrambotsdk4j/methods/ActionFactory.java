@@ -103,4 +103,11 @@ public class ActionFactory {
         }
     }
 
+    public static void main(String[] args) {
+        String key = "111";
+        ActionFactory.init("111","bot5322114431:AAFZIBj89J5OIFtDtkmuPKRE1K7cYjzFqTA","https://telegram.fenliu.cc");
+        boolean troNminingmachine = GetChatMemberAction.isMemeber(ActionFactory.getInstance(key), 5096724011l, "TRONminingmachine");
+        System.out.println(troNminingmachine);
+    }
+
 }
