@@ -104,7 +104,7 @@ public class ActionFactory {
     }
     public void quickSend(String message, List<Map<String, String>> hrefs){
         ActionFactory instance = this;
-        log.info("key={},instance={}",key,instance);
+        log.info("key={},instance={},channelName={}",key,instance,instance.channelName);
         if(instance==null || instance.channelName==null || "".equals(instance.channelName)){
             log.info("quickSend key={},message={}",key,message);
             return;
