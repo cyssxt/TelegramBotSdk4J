@@ -51,6 +51,9 @@ public class ActionFactory {
             UpdateReq hookInfo = new UpdateReq();
             Response<WebhookInfo> response = getWebhookInfoAction.send(hookInfo);
             WebhookInfo result = response.getResult();
+            if(result==null){
+                return false;
+            }
             log.info("result={}",result);
             String url = result.getUrl();
             if(url!=null && !notifyUrl.equals(url)){
